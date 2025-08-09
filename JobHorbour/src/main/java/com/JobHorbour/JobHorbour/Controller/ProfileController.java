@@ -2,11 +2,9 @@ package com.JobHorbour.JobHorbour.Controller;
 
 import com.JobHorbour.JobHorbour.Assembler.ProfileAssembler;
 import com.JobHorbour.JobHorbour.Dto.CreateProfileDto;
-import com.JobHorbour.JobHorbour.Dto.SignUpDto;
 import com.JobHorbour.JobHorbour.Dto.UpdateProfileDto;
 import com.JobHorbour.JobHorbour.Entity.Profile;
 import com.JobHorbour.JobHorbour.Service.ProfileService;
-import com.JobHorbour.JobHorbour.Service.ProfileService2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;

@@ -30,7 +30,7 @@ public class AuthServiceImpl extends AuthService {
     }
 
     @Override
-    public void loginUser(SignInDto signInDto) throws Exception {
+    public User loginUser(SignInDto signInDto) throws Exception {
         Optional<User> userOpt = authRepository.findByEmail(signInDto.getEmail());
         if(userOpt.isEmpty()){
             throw new Exception("User Not found");
@@ -39,7 +39,7 @@ public class AuthServiceImpl extends AuthService {
         if (!user.getPassword().equals(signInDto.getPassword())) {
             throw new Exception("Invalid credentials. Please check your password.");
         }
-
+         return userOpt.get();
 
     }
 }
