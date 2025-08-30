@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static java.sql.Types.NULL;
@@ -82,5 +83,10 @@ public class ProfileServiceImpl extends ProfileService{
     public Profile getProfileByUserId(Long userId) throws Exception {
         return profileRepository.findByUserId(userId)
                 .orElseThrow(() -> new Exception("Profile not found for user ID: " + userId));
+    }
+
+    @Override
+    public List<Profile> getApplicationsByCompanyId(Long companyId){
+        return profileRepository.getApplicationsByCompanyId(companyId);
     }
 }

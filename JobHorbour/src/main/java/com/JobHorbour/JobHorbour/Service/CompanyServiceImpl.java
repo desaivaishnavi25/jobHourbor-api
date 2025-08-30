@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static java.sql.Types.NULL;
@@ -47,15 +48,15 @@ public class CompanyServiceImpl extends CompanyService {
         company.setCity(createCompanyDto.getCity());
         company.setDescription(createCompanyDto.getDescription());
         company.setFoundedYear(createCompanyDto.getFoundedYear());
+        company.setTitle(createCompanyDto.getTitle());
+        company.setUser(user);
 
         companyRepository.save(company);
     }
 
     @Override
-    public void updateCompany(Long userId, UpdateCompanyDto updateCompanyDto) throws Exception {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new Exception("User not found with ID: " + userId));
-        Company company = companyRepository.findByUserId(userId).orElseThrow(() -> new Exception("User not found "));
+    public void updateCompany(Long companyId, UpdateCompanyDto updateCompanyDto) throws Exception {
+        Company company = companyRepository.findById(companyId).orElseThrow(() -> new Exception("User not found "));
         if(updateCompanyDto.getCompanyName()!=null){
             company.setCompanyName(updateCompanyDto.getCompanyName());
         }
@@ -80,20 +81,37 @@ public class CompanyServiceImpl extends CompanyService {
         if(updateCompanyDto.getFoundedYear()!=null){
             company.setFoundedYear(updateCompanyDto.getFoundedYear());
         }
+        if(updateCompanyDto.getTitle()!=null){
+            company.setTitle(updateCompanyDto.getTitle());
+        }
         companyRepository.save(company);
     }
 
     @Override
-    public void deleteProfile(Long userId) throws Exception {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new Exception("User not found with ID: " + userId));
-        Company company = companyRepository.findByUserId(userId).orElseThrow(() -> new Exception("User not found "));
-        companyRepository.deleteByUserId(userId);
+    public void deleteProfile(Long companyId) throws Exception {
+
+        Company company = companyRepository.findById(companyId).orElseThrow(() -> new Exception("User not found "));
+        companyRepository.deleteByUserId(companyId);
     }
 
     @Override
-    public Company getCompanyByUserId(Long userId) throws Exception {
+    public List<Company> getCompanyByUserId(Long userId) throws Exception {
         return companyRepository.findByUserId(userId)
                 .orElseThrow(() -> new Exception("Profile not found for user ID: " + userId));
+    }
+    @Override
+    public Company getCompanyById(Long companyId) throws Exception {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new Exception("Profile not found for user ID: " + companyId));
+    }
+
+    @Override
+    public List<Company> getAllCompanies() throws Exception {
+        return companyRepository.findAll();
+    }
+
+    @Override
+    public List<Company> getAppliedCompaniesByUserId(Long userId){
+        return companyRepository.getAppliedCompaniesByUserId(userId);
     }
 }

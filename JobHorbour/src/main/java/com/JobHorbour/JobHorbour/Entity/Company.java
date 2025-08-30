@@ -13,11 +13,13 @@ public class Company {
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", referencedColumnName = "id", nullable = false)
     private User user;
     @Column(name="companyName")
     private String companyName;
+    @Column(name="title")
+    private String title;
     @Column(name="companyEmail")
     private String companyEmail;
     @Column(name="companyContactNumber")

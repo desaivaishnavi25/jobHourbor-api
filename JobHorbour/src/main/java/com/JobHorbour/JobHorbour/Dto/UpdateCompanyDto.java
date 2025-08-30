@@ -16,4 +16,5 @@ public class UpdateCompanyDto {
     private String city;
     private String description;
     private Date foundedYear;
+    private String Title;
 }

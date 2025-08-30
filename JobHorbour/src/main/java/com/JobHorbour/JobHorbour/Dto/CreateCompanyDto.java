@@ -1,7 +1,6 @@
 package com.JobHorbour.JobHorbour.Dto;
 
 import com.JobHorbour.JobHorbour.Entity.User;
-import jakarta.persistence.Column;
 import lombok.Data;
 import org.antlr.v4.runtime.misc.NotNull;
 
@@ -13,6 +12,8 @@ public class CreateCompanyDto {
     private User user;
     @NotNull
     private String companyName;
+    @NotNull
+    private String title;
     @NotNull
     private String companyEmail;
     @NotNull
